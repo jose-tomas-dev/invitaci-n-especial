@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una noche para nosotros ✦</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+html,
+body {
+width: 100%;
+min-height: 100%;
+overflow: hidden;
+}
+
+body {
+background: #020204;
+color: white;
+font-family: "Montserrat", sans-serif;
+}
+
+/* =========================
+CIELO
+========================= */
+
+.sky {
+position: fixed;
+inset: 0;
+overflow: hidden;
+background:
+radial-gradient(
+circle at 50% 45%,
+rgba(125, 92, 40, 0.15),
+transparent 30%
+),
+radial-gradient(
+circle at 20% 20%,
+rgba(255,255,255,.04),
+transparent 25%
+),
+linear-gradient(
+180deg,
+#020205 0%,
+#08070b 50%,
+#030304 100%
+);
+}
+
+/* =========================
+ESTRELLAS
+========================= */
+
+.stars,
+.stars::before,
+.stars::after {
+position: absolute;
+inset: 0;
+content: "";
+background-image:
+radial-gradient(circle, rgba(255,255,255,.9) 1px, transparent 1.5px),
+radial-gradient(circle, rgba(216,181,110,.7) 1px, transparent 1.5px),
+radial-gradient(circle, rgba(255,255,255,.5) .7px, transparent 1px);
+
+background-size:
+130px 150px,
+190px 200px,
+90px 110px;
+
+animation: starsMove 25s linear infinite;
+}
+
+.stars::before {
+opacity: .45;
+transform: scale(1.5);
+animation-duration: 40s;
+}
+
+.stars::after {
+opacity: .25;
+transform: scale(2);
+animation-duration: 60s;
+}
+
+@keyframes starsMove {
+
+from {
+transform: translateY(0);
+}
+
+to {
+transform: translateY(-150px);
+}
+
+}
+
+/* =========================
+ESTRELLAS FUGACES
+========================= */
+
+.shooting-star {
+position: absolute;
+width: 2px;
+height: 2px;
+background: white;
+border-radius: 50%;
+opacity: 0;
+}
+
+.shooting-star::after {
+content: "";
+position: absolute;
+width: 130px;
+height: 1px;
+right: 0;
+top: 0;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.7)
+);
+transform: rotate(-35deg);
+transform-origin: right;
+}
+
+.star1 {
+top: 18%;
+left: 10%;
+animation: shooting 7s infinite 2s;
+}
+
+.star2 {
+top: 30%;
+left: 80%;
+animation: shooting 9s infinite 5s;
+}
+
+.star3 {
+top: 10%;
+left: 60%;
+animation: shooting 11s infinite 7s;
+}
+
+@keyframes shooting {
+
+0% {
+opacity: 0;
+transform: translate(0,0);
+}
+
+5% {
+opacity: 1;
+}
+
+15% {
+opacity: 0;
+transform: translate(-300px,180px);
+}
+
+100% {
+opacity: 0;
+}
+
+}
+
+/* =========================
+LUNA
+========================= */
+
+.moon {
+position: absolute;
+width: 190px;
+height: 190px;
+border-radius: 50%;
+right: 8%;
+top: 8%;
+
+background:
+radial-gradient(
+circle at 35% 35%,
+#fffef8,
+#e8dfc9 55%,
+#a99a7c 100%
+);
+
+box-shadow:
+0 0 35px rgba(255,239,194,.35),
+0 0 100px rgba(255,218,145,.12);
+
+opacity: .75;
+}
+
+.moon::after {
+content: "";
+position: absolute;
+width: 190px;
+height: 190px;
+border-radius: 50%;
+background: #020205;
+left: 38px;
+top: -12px;
+}
+
+/* =========================
+CONTENEDOR
+========================= */
+
+.container {
+position: relative;
+z-index: 10;
+width: 100%;
+min-height: 100vh;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+padding: 25px;
+}
+
+/* =========================
+PANTALLA INICIAL
+========================= */
+
+.intro {
+position: absolute;
+z-index: 50;
+
+width: 100%;
+height: 100vh;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+text-align: center;
+
+background: rgba(2,2,4,.97);
+
+transition:
+opacity 1.2s ease,
+visibility 1.2s ease;
+}
+
+.intro.hide {
+opacity: 0;
+visibility: hidden;
+}
+
+.intro-content {
+animation: introAppear 2s ease;
+}
+
+.small-title {
+color: #c8a866;
+font-size: 11px;
+letter-spacing: 6px;
+text-transform: uppercase;
+margin-bottom: 30px;
+}
+
+.intro h1 {
+font-family: "Cormorant Garamond", serif;
+font-size: clamp(55px, 12vw, 100px);
+font-weight: 300;
+line-height: .85;
+margin-bottom: 35px;
+}
+
+.intro p {
+color: #aaa39a;
+font-size: 12px;
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 45px;
+}
+
+.open-button {
+position: relative;
+border: 1px solid rgba(200,168,102,.7);
+background: transparent;
+color: #d9bb7c;
+
+padding: 17px 38px;
+
+font-family: "Montserrat", sans-serif;
+font-size: 11px;
+letter-spacing: 4px;
+text-transform: uppercase;
+
+cursor: pointer;
+
+transition: .4s;
+overflow: hidden;
+}
+
+.open-button::before {
+content: "";
+position: absolute;
+left: -100%;
+top: 0;
+
+width: 100%;
+height: 100%;
+
+background: linear-gradient(
+90deg,
+transparent,
+rgba(200,168,102,.25),
+transparent
+);
+
+transition: .6s;
+}
+
+.open-button:hover::before {
+left: 100%;
+}
+
+.open-button:hover {
+box-shadow:
+0 0 30px rgba(200,168,102,.15);
+
+transform: translateY(-2px);
+}
+
+@keyframes introAppear {
+
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+
+}
+
+/* =========================
+CARTA
+========================= */
+
+.card {
+position: relative;
+
+width: min(680px, 100%);
+
+padding: 75px 55px;
+
+text-align: center;
+
+background:
+linear-gradient(
+145deg,
+rgba(22,20,17,.92),
+rgba(8,8,9,.96)
+);
+
+border: 1px solid rgba(198,163,93,.45);
+
+box-shadow:
+0 0 0 1px rgba(255,255,255,.02),
+0 40px 120px rgba(0,0,0,.8),
+inset 0 0 80px rgba(191,151,78,.025);
+
+transform:
+perspective(1200px)
+rotateX(0deg)
+rotateY(0deg);
+
+transition: transform .15s ease;
+
+animation: cardAppear 2s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes cardAppear {
+
+from {
+opacity: 0;
+transform:
+perspective(1200px)
+translateY(70px)
+scale(.92);
+}
+
+to {
+opacity: 1;
+transform:
+perspective(1200px)
+translateY(0)
+scale(1);
+}
+
+}
+
+/* Bordes */
+
+.card::before,
+.card::after {
+content: "";
+position: absolute;
+
+width: 45px;
+height: 45px;
+
+border-color: #c8a866;
+border-style: solid;
+}
+
+.card::before {
+left: 14px;
+top: 14px;
+
+border-width: 1px 0 0 1px;
+}
+
+.card::after {
+right: 14px;
+bottom: 14px;
+
+border-width: 0 1px 1px 0;
+}
+
+.corner-right,
+.corner-bottom {
+position: absolute;
+
+width: 45px;
+height: 45px;
+
+border-color: #c8a866;
+border-style: solid;
+}
+
+.corner-right {
+right: 14px;
+top: 14px;
+
+border-width: 1px 1px 0 0;
+}
+
+.corner-bottom {
+left: 14px;
+bottom: 14px;
+
+border-width: 0 0 1px 1px;
+}
+
+/* =========================
+TEXTO
+========================= */
+
+.eyebrow {
+color: #c8a866;
+
+font-size: 10px;
+letter-spacing: 6px;
+
+text-transform: uppercase;
+
+margin-bottom: 25px;
+}
+
+.symbol {
+color: #d8b976;
+
+font-size: 24px;
+
+margin-bottom: 15px;
+
+animation:
+glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+
+0%,100% {
+opacity: .5;
+text-shadow: none;
+}
+
+50% {
+opacity: 1;
+text-shadow:
+0 0 20px rgba(216,185,118,.8);
+}
+
+}
+
+.card h1 {
+font-family: "Cormorant Garamond", serif;
+
+font-size: clamp(55px, 10vw, 85px);
+
+line-height: .85;
+
+font-weight: 400;
+
+margin-bottom: 38px;
+
+background:
+linear-gradient(
+120deg,
+#f7f1e5,
+#c9a965,
+#fff8e8
+);
+
+-webkit-background-clip: text;
+background-clip: text;
+
+color: transparent;
+}
+
+.message {
+font-family: "Cormorant Garamond", serif;
+
+font-size: clamp(25px, 5vw, 35px);
+
+line-height: 1.3;
+
+color: #eee8dc;
+
+font-weight: 400;
+}
+
+.message span {
+display: inline-block;
+
+opacity: 0;
+
+transform: translateY(20px);
+
+animation:
+wordAppear .7s forwards;
+}
+
+@keyframes wordAppear {
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+
+}
+
+.divider {
+width: 100px;
+height: 1px;
+
+margin: 38px auto;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+#c8a866,
+transparent
+);
+
+box-shadow:
+0 0 15px rgba(200,168,102,.25);
+}
+
+.date-label {
+color: #858078;
+
+font-size: 9px;
+
+letter-spacing: 4px;
+
+text-transform: uppercase;
+
+margin-bottom: 12px;
+}
+
+.date {
+color: #c8a866;
+
+font-family: "Cormorant Garamond", serif;
+
+font-size: clamp(28px, 6vw, 40px);
+
+letter-spacing: 1px;
+}
+
+.bottom-text {
+margin-top: 32px;
+
+color: #68635c;
+
+font-size: 9px;
+
+letter-spacing: 3px;
+
+text-transform: uppercase;
+}
+
+.heart {
+display: block;
+
+margin-top: 25px;
+
+color: #c8a866;
+
+font-size: 18px;
+
+animation:
+heartPulse 2s infinite;
+}
+
+@keyframes heartPulse {
+
+0%,100% {
+transform: scale(1);
+}
+
+50% {
+transform: scale(1.3);
+}
+
+}
+
+/* =========================
+PARTÍCULAS DORADAS
+========================= */
+
+.particle {
+position: absolute;
+
+width: 3px;
+height: 3px;
+
+border-radius: 50%;
+
+background: #d5b570;
+
+box-shadow:
+0 0 10px #d5b570;
+
+opacity: .4;
+
+animation:
+particleFloat 8s infinite ease-in-out;
+}
+
+.p1 { left: 15%; bottom: 20%; animation-delay: 1s; }
+.p2 { left: 30%; bottom: 10%; animation-delay: 3s; }
+.p3 { right: 20%; bottom: 25%; animation-delay: 2s; }
+.p4 { right: 30%; top: 25%; animation-delay: 4s; }
+.p5 { left: 20%; top: 35%; animation-delay: 5s; }
+
+@keyframes particleFloat {
+
+0%,100% {
+transform: translateY(0);
+opacity: .2;
+}
+
+50% {
+transform: translateY(-80px);
+opacity: .9;
+}
+
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+.moon {
+width: 120px;
+height: 120px;
+right: -20px;
+top: 5%;
+}
+
+.moon::after {
+width: 120px;
+height: 120px;
+left: 25px;
+top: -8px;
+}
+
+.card {
+padding: 55px 25px;
+}
+
+.eyebrow {
+letter-spacing: 4px;
+}
+
+.message {
+font-size: 27px;
+}
+
+.date {
+font-size: 31px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- CIELO -->
+
+<div class="sky">
+
+<div class="stars"></div>
+
+<div class="moon"></div>
+
+<div class="shooting-star star1"></div>
+<div class="shooting-star star2"></div>
+<div class="shooting-star star3"></div>
+
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+
+</div>
+
+
+<!-- INTRO -->
+
+<section class="intro" id="intro">
+
+<div class="intro-content">
+
+<div class="small-title">
+He preparado algo para ti
+</div>
+
+<h1>
+Una noche<br>
+especial
+</h1>
+
+<p>
+Hay una invitación esperando por ti
+</p>
+
+<button class="open-button" id="openButton">
+Abrir invitación
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CONTENIDO -->
+
+<main class="container">
+
+<section class="card" id="card">
+
+<span class="corner-right"></span>
+<span class="corner-bottom"></span>
+
+<div class="eyebrow">
+Una invitación para ti
+</div>
+
+<div class="symbol">
+✦
+</div>
+
+<h1>
+Para ti
+</h1>
+
+<div class="message" id="message">
+Este día quiero llevarte a la cima y darte un poco de todas las cosas lindas que mereces, ponte más hermosa de lo que ya eres
+</div>
+
+<div class="divider"></div>
+
+<div class="date-label">
+Nuestra cita
+</div>
+
+<div class="date">
+Domingo · 27 de septiembre
+</div>
+
+<span class="heart">
+♡
+</span>
+
+<div class="bottom-text">
+Prepárate para una noche inolvidable
+</div>
+
+</section>
+
+</main>
+
+
+<script>
+
+const intro = document.getElementById("intro");
+const button = document.getElementById("openButton");
+const card = document.getElementById("card");
+const message = document.getElementById("message");
+
+/* =========================
+ABRIR INVITACIÓN
+========================= */
+
+button.addEventListener("click", () => {
+
+intro.classList.add("hide");
+
+document.body.style.overflow = "hidden";
+
+setTimeout(() => {
+
+animateMessage();
+
+}, 800);
+
+});
+
+
+/* =========================
+ANIMACIÓN DEL MENSAJE
+========================= */
+
+function animateMessage() {
+
+const text = message.textContent.trim();
+
+message.innerHTML = "";
+
+const words = text.split(" ");
+
+words.forEach((word, index) => {
+
+const span = document.createElement("span");
+
+span.textContent = word + " ";
+
+span.style.animationDelay =
+`${index * 0.045}s`;
+
+message.appendChild(span);
+
+});
+
+}
+
+
+/* =========================
+EFECTO 3D
+========================= */
+
+document.addEventListener("mousemove", (event) => {
+
+if (window.innerWidth < 700) return;
+
+const x =
+(window.innerWidth / 2 - event.clientX) / 45;
+
+const y =
+(window.innerHeight / 2 - event.clientY) / 45;
+
+card.style.transform =
+`perspective(1200px)
+rotateY(${x}deg)
+rotateX(${y}deg)`;
+
+});
+
+
+document.addEventListener("mouseleave", () => {
+
+card.style.transform =
+`perspective(1200px)
+rotateY(0deg)
+rotateX(0deg)`;
+
+});
+
+
+/* =========================
+ESTRELLAS EXTRA ALEATORIAS
+========================= */
+
+const sky = document.querySelector(".sky");
+
+for (let i = 0; i < 45; i++) {
+
+const star = document.createElement("div");
+
+star.style.position = "absolute";
+star.style.width = Math.random() * 2 + "px";
+star.style.height = star.style.width;
+star.style.borderRadius = "50%";
+star.style.background = "white";
+star.style.left = Math.random() * 100 + "%";
+star.style.top = Math.random() * 100 + "%";
+star.style.opacity = Math.random() * .7 + .1;
+
+star.style.animation =
+`twinkle ${2 + Math.random() * 5}s infinite ease-in-out`;
+
+sky.appendChild(star);
+
+}
+
+
+</script>
+
+
+<style>
+
+@keyframes twinkle {
+
+0%,100% {
+opacity: .15;
+transform: scale(.7);
+}
+
+50% {
+opacity: 1;
+transform: scale(1.4);
+}
+
+}
+
+</style>
+
+</body>
+</html>
